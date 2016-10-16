@@ -1,0 +1,8 @@
+AllCops:
+  Gemfile:
+    Patterns:
+    - "Gemfile"
+
+Gemfile/GroupSingleEnvironment:
+  Description: "Check that group have single environment"
+  Enabled: true

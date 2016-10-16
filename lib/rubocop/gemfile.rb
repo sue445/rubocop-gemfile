@@ -1,7 +1,8 @@
+require "rubocop"
 require "rubocop/gemfile/version"
+require "rubocop/gemfile/inject"
 
-module Rubocop
-  module Gemfile
-    # Your code goes here...
-  end
-end
+RuboCop::Gemfile::Inject.defaults!
+
+# cops
+require "rubocop/cop/gemfile/group_single_environment"
