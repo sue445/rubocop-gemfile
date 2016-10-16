@@ -3,6 +3,6 @@ AllCops:
     Patterns:
     - "Gemfile"
 
-Gemfile/GroupSingleEnvironment:
-  Description: "Check that group have single environment"
+Gemfile/GroupBlockHasSingleGroup:
+  Description: "Check that `group` have single group"
   Enabled: true

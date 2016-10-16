@@ -1,4 +1,4 @@
-describe RuboCop::Cop::Gemfile::GroupSingleEnvironment do
+describe RuboCop::Cop::Gemfile::GroupBlockHasSingleGroup do
   subject(:cop) { described_class.new }
 
   context "Single group" do
@@ -31,7 +31,7 @@ end
       inspect_source(cop, source)
 
       aggregate_failures do
-        expect(cop.messages).to eq "`group` should not have multiple environments"
+        expect(cop.messages).to eq ["`group` should not have multiple groups"]
         expect(cop.offenses.size).to eq 1
         expect(cop.highlights).to eq([':test, :development'])
       end
