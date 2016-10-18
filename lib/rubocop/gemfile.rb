@@ -6,3 +6,4 @@ RuboCop::Gemfile::Inject.defaults!
 
 # cops
 require "rubocop/cop/gemfile/single_group"
+require "rubocop/cop/gemfile/group_type"

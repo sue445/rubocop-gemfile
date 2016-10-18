@@ -6,3 +6,11 @@ AllCops:
 Gemfile/SingleGroup:
   Description: "Check that `group` method has single group name"
   Enabled: true
+
+Gemfile/GroupType:
+  Description: "Use enforced type group"
+  EnforcedStyle: Symbol
+  SupportedStyles:
+    - Symbol
+    - String
+  Enabled: true
