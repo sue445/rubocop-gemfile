@@ -9,14 +9,7 @@ end
       RUBY
     end
 
-    it do
-      inspect_source(cop, source)
-
-      aggregate_failures do
-        expect(cop.messages).to be_empty
-        expect(cop.offenses).to be_empty
-      end
-    end
+    it_behaves_like "no offences"
   end
 
   context "Muiliple group" do

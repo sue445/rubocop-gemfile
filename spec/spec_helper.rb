@@ -2,7 +2,7 @@ require 'rubocop'
 
 require 'rubocop/rspec/support'
 
-Dir["#{__dir__}/support/**/*.rb"].each(&:require)
+Dir["#{__dir__}/support/**/*.rb"].each { |f| require f }
 
 RSpec.configure do |config|
   config.order = :random
