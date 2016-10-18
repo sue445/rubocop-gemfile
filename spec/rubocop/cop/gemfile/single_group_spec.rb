@@ -1,4 +1,4 @@
-describe RuboCop::Cop::Gemfile::GroupBlockHasSingleGroup do
+describe RuboCop::Cop::Gemfile::SingleGroup do
   subject(:cop) { described_class.new }
 
   context "Single group" do

@@ -3,6 +3,6 @@ AllCops:
     Patterns:
     - "Gemfile"
 
-Gemfile/GroupBlockHasSingleGroup:
+Gemfile/SingleGroup:
   Description: "Check that `group` have single group"
   Enabled: true

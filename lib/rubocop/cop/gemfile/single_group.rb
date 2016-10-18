@@ -15,7 +15,7 @@ module RuboCop
       #   group :test do
       #     gem "rspec-rails", group: :development
       #   end
-      class GroupBlockHasSingleGroup < Cop
+      class SingleGroup < Cop
         MSG = '`group` should not have multiple groups'.freeze
 
         def on_send(node)
