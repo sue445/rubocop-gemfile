@@ -4,5 +4,5 @@ AllCops:
     - "Gemfile"
 
 Gemfile/SingleGroup:
-  Description: "Check that `group` have single group"
+  Description: "Check that `group` method has single group name"
   Enabled: true
