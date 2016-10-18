@@ -23,9 +23,7 @@ module RuboCop
 
           return unless method_name == :group
 
-          if args.length >= 2
-            add_offense(node, arg_location(args))
-          end
+          add_offense(node, arg_location(args)) if args.length >= 2
         end
 
         private
