@@ -81,6 +81,34 @@ module RuboCop
           end
         end
 
+        def autocorrect(node)
+          _receiver, _method_name, *args = *node
+
+          case cop_config["EnforcedStyle"]
+          when "symbol"
+            lambda do |corrector|
+              args.each do |arg|
+                content = arg_content(arg)
+                corrector.replace(arg_location(arg), to_symbol_literal(content)) if content
+              end
+            end
+          when "double_quotes"
+            lambda do |corrector|
+              args.each do |arg|
+                content = arg_content(arg)
+                corrector.replace(arg_location(arg), content.inspect) if content
+              end
+            end
+          when "single_quotes"
+            lambda do |corrector|
+              args.each do |arg|
+                content = arg_content(arg)
+                corrector.replace(arg_location(arg), to_string_literal(content)) if content
+              end
+            end
+          end
+        end
+
         private
 
         def single_quotes?(arg)
@@ -93,6 +121,20 @@ module RuboCop
 
         def quotes?(arg, quote)
           arg.str_type? && arg.loc.expression.source_buffer.source[arg.loc.begin.begin_pos] == quote
+        end
+
+        def arg_location(arg)
+          begin_pos = arg.loc.begin.begin_pos
+          end_pos = arg.loc.expression.end_pos
+          Parser::Source::Range.new(arg.loc.expression.source_buffer, begin_pos, end_pos)
+        end
+
+        def arg_content(arg)
+          if arg.sym_type?
+            arg.to_a.first.to_s
+          elsif arg.str_type?
+            arg.str_content
+          end
         end
       end
     end

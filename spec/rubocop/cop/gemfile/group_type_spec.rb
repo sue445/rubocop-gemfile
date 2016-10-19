@@ -26,6 +26,13 @@ end
       context "EnforcedStyle: single_quotes" do
         let(:enforced_style) { "single_quotes" }
 
+        let(:expected_source) do
+          <<-RUBY
+group 'test' do
+end
+          RUBY
+        end
+
         it do
           inspect_source(cop, source)
 
@@ -35,10 +42,22 @@ end
             expect(cop.highlights).to eq([%q(:test)])
           end
         end
+
+        it "auto-correct" do
+          new_source = autocorrect_source(cop, source)
+          expect(new_source).to eq(expected_source)
+        end
       end
 
       context "EnforcedStyle: double_quotes" do
         let(:enforced_style) { "double_quotes" }
+
+        let(:expected_source) do
+          <<-RUBY
+group "test" do
+end
+          RUBY
+        end
 
         it do
           inspect_source(cop, source)
@@ -48,6 +67,11 @@ end
             expect(cop.offenses.size).to eq 1
             expect(cop.highlights).to eq([%q(:test)])
           end
+        end
+
+        it "auto-correct" do
+          new_source = autocorrect_source(cop, source)
+          expect(new_source).to eq(expected_source)
         end
       end
     end
@@ -63,6 +87,13 @@ end
       context "EnforcedStyle: symbol" do
         let(:enforced_style) { "symbol" }
 
+        let(:expected_source) do
+          <<-RUBY
+group :test do
+end
+          RUBY
+        end
+
         it do
           inspect_source(cop, source)
 
@@ -71,6 +102,11 @@ end
             expect(cop.offenses.size).to eq 1
             expect(cop.highlights).to eq([%q('test')])
           end
+        end
+
+        it "auto-correct" do
+          new_source = autocorrect_source(cop, source)
+          expect(new_source).to eq(expected_source)
         end
       end
 
@@ -83,6 +119,13 @@ end
       context "EnforcedStyle: double_quotes" do
         let(:enforced_style) { "double_quotes" }
 
+        let(:expected_source) do
+          <<-RUBY
+group "test" do
+end
+          RUBY
+        end
+
         it do
           inspect_source(cop, source)
 
@@ -91,6 +134,11 @@ end
             expect(cop.offenses.size).to eq 1
             expect(cop.highlights).to eq([%q('test')])
           end
+        end
+
+        it "auto-correct" do
+          new_source = autocorrect_source(cop, source)
+          expect(new_source).to eq(expected_source)
         end
       end
     end
@@ -106,6 +154,13 @@ end
       context "EnforcedStyle: symbol" do
         let(:enforced_style) { "symbol" }
 
+        let(:expected_source) do
+          <<-RUBY
+group :test do
+end
+          RUBY
+        end
+
         it do
           inspect_source(cop, source)
 
@@ -115,10 +170,22 @@ end
             expect(cop.highlights).to eq([%q("test")])
           end
         end
+
+        it "auto-correct" do
+          new_source = autocorrect_source(cop, source)
+          expect(new_source).to eq(expected_source)
+        end
       end
 
       context "EnforcedStyle: single_quotes" do
         let(:enforced_style) { "single_quotes" }
+
+        let(:expected_source) do
+          <<-RUBY
+group 'test' do
+end
+          RUBY
+        end
 
         it do
           inspect_source(cop, source)
@@ -128,6 +195,11 @@ end
             expect(cop.offenses.size).to eq 1
             expect(cop.highlights).to eq([%q("test")])
           end
+        end
+
+        it "auto-correct" do
+          new_source = autocorrect_source(cop, source)
+          expect(new_source).to eq(expected_source)
         end
       end
 
