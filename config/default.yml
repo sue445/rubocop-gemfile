@@ -9,8 +9,9 @@ Gemfile/SingleGroup:
 
 Gemfile/GroupType:
   Description: "Use enforced type group"
-  EnforcedStyle: Symbol
+  EnforcedStyle: symbol
   SupportedStyles:
-    - Symbol
-    - String
+    - symbol
+    - double_quotes
+    - single_quotes
   Enabled: true
