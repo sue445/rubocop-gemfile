@@ -11,7 +11,8 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Code style checking for Gemfile}
   spec.description   = %q{Code style checking for Gemfile}
-  spec.homepage      = "https://github.com/sue445/rubocop-gemfile"
+  # TODO make public
+  # spec.homepage      = "https://github.com/sue445/rubocop-gemfile"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
