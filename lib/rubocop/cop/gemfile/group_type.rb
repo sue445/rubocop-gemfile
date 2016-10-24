@@ -6,8 +6,7 @@ module RuboCop
       # This cop makes sure that `group` has symbol group name
       #
       # @example
-      #
-      #   EnforcedStyle: symbol
+      #   # EnforcedStyle: symbol
       #
       #   # bad
       #   group "test" do
@@ -23,7 +22,7 @@ module RuboCop
       #     gem "rspec-rails"
       #   end
       #
-      #   EnforcedStyle: single_quotes
+      #   # EnforcedStyle: single_quotes
       #
       #   # bad
       #   group :test do
@@ -39,7 +38,7 @@ module RuboCop
       #     gem "rspec-rails"
       #   end
       #
-      #   EnforcedStyle: double_quotes
+      #   # EnforcedStyle: double_quotes
       #
       #   # bad
       #   group :test do
