@@ -6,8 +6,7 @@ module RuboCop
       # This cop makes sure that `group` has symbol group name
       #
       # @example
-      #
-      #   EnforcedStyle: symbol
+      #   # EnforcedStyle: symbol
       #
       #   # bad
       #   group "test" do
@@ -23,7 +22,7 @@ module RuboCop
       #     gem "rspec-rails"
       #   end
       #
-      #   EnforcedStyle: single_quotes
+      #   # EnforcedStyle: single_quotes
       #
       #   # bad
       #   group :test do
@@ -39,7 +38,7 @@ module RuboCop
       #     gem "rspec-rails"
       #   end
       #
-      #   EnforcedStyle: double_quotes
+      #   # EnforcedStyle: double_quotes
       #
       #   # bad
       #   group :test do
@@ -57,6 +56,10 @@ module RuboCop
       class GroupType < Cop
         MSG = 'Use %s group'.freeze
 
+        ENFORCED_STYLE_SYMBOL        = "symbol".freeze
+        ENFORCED_STYLE_DOUBLE_QUOTES = "double_quotes".freeze
+        ENFORCED_STYLE_SINGLE_QUOTES = "single_quotes".freeze
+
         def on_send(node)
           _, method_name, *args = *node
 
@@ -71,11 +74,11 @@ module RuboCop
 
           args.each do |arg|
             case enforced_style
-            when "symbol"
+            when ENFORCED_STYLE_SYMBOL
               add_offense(node, arg.loc.expression, message) if arg.str_type?
-            when "double_quotes"
+            when ENFORCED_STYLE_DOUBLE_QUOTES
               add_offense(node, arg.loc.expression, message) if arg.sym_type? || single_quotes?(arg)
-            when "single_quotes"
+            when ENFORCED_STYLE_SINGLE_QUOTES
               add_offense(node, arg.loc.expression, message) if arg.sym_type? || double_quotes?(arg)
             end
           end
@@ -85,21 +88,21 @@ module RuboCop
           _receiver, _method_name, *args = *node
 
           case cop_config["EnforcedStyle"]
-          when "symbol"
+          when ENFORCED_STYLE_SYMBOL
             lambda do |corrector|
               args.each do |arg|
                 content = arg_content(arg)
                 corrector.replace(arg_location(arg), to_symbol_literal(content)) if content
               end
             end
-          when "double_quotes"
+          when ENFORCED_STYLE_DOUBLE_QUOTES
             lambda do |corrector|
               args.each do |arg|
                 content = arg_content(arg)
                 corrector.replace(arg_location(arg), content.inspect) if content
               end
             end
-          when "single_quotes"
+          when ENFORCED_STYLE_SINGLE_QUOTES
             lambda do |corrector|
               args.each do |arg|
                 content = arg_content(arg)
