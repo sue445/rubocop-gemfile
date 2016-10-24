@@ -7,4 +7,9 @@ RSpec.shared_examples "no offences" do
       expect(cop.offenses).to be_empty
     end
   end
+
+  it "should not be changed with auto-correct" do
+    new_source = autocorrect_source(cop, source)
+    expect(new_source).to eq(source)
+  end
 end
