@@ -23,12 +23,12 @@ module RuboCop
 
           return unless method_name == :group
 
-          add_offense(node, arg_location(args)) if args.length >= 2
+          add_offense(node, args_location(args)) if args.length >= 2
         end
 
         private
 
-        def arg_location(args)
+        def args_location(args)
           begin_pos = args.first.loc.begin.begin_pos
           end_pos = args.last.loc.expression.end_pos
           Parser::Source::Range.new(args.first.loc.expression.source_buffer, begin_pos, end_pos)
