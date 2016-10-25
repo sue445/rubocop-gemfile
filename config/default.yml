@@ -18,4 +18,5 @@ Gemfile/GroupType:
 
 Gemfile/SortGemAscending:
   Description: "Sort the gem in alphabetical order"
+  TopGems:
   Enabled: true
