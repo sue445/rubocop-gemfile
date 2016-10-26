@@ -160,4 +160,69 @@ gem 'uglifier', '>= 1.3.0'
       expect(new_source).to eq(expected_source)
     end
   end
+
+  context "contains group block" do
+    context "With ascending 1" do
+      let(:source) do
+        <<-RUBY
+source "https://rubygems.org"
+
+gem "bundler"
+gem "rails"
+
+group :test do
+  gem "factory_girl"
+  gem "rspec"
+end
+        RUBY
+      end
+
+      it_behaves_like "no offences"
+    end
+
+    context "Without ascending 1" do
+      let(:source) do
+        <<-RUBY
+source "https://rubygems.org"
+
+gem "bundler"
+gem "rails"
+
+group :test do
+  gem "rspec"
+  gem "factory_girl"
+end
+        RUBY
+      end
+
+      let(:expected_source) do
+        <<-RUBY
+source "https://rubygems.org"
+
+gem "bundler"
+gem "rails"
+
+group :test do
+  gem "factory_girl"
+  gem "rspec"
+end
+        RUBY
+      end
+
+      it do
+        inspect_source(cop, source)
+
+        aggregate_failures do
+          expect(cop.messages).to eq ["gem should be sorted by ascending"]
+          expect(cop.offenses.size).to eq 1
+          expect(cop.highlights).to eq([%q(gem "factory_girl")])
+        end
+      end
+
+      it "auto-correct" do
+        new_source = autocorrect_source(cop, source)
+        expect(new_source).to eq(expected_source)
+      end
+    end
+  end
 end
