@@ -17,12 +17,10 @@ module RuboCop
         MSG = "gem should be sorted by ascending".freeze
 
         def on_begin(node)
-          gems = node.children.select{ |n| gem_type?(n) }
+          gems = string_arg_gems(node)
           gems.each_cons(2) do |gem1, gem2|
             gem_name1 = gem_name(gem1)
             gem_name2 = gem_name(gem2)
-
-            next if !gem_name1 || !gem_name2
 
             add_offense(node, gem2.loc.expression) if gem_name1 > gem_name2
           end
@@ -30,25 +28,29 @@ module RuboCop
 
         def autocorrect(node)
           lambda do |corrector|
-            gems = node.children.select{ |n| gem_type?(n) }
-            string_arg_gems = gems.select { |gem| gem_name(gem)  }
-            sorted_gems     = string_arg_gems.sort_by { |gem| gem_name(gem) }
+            gems        = string_arg_gems(node)
+            sorted_gems = gems.sort_by { |gem| gem_name(gem) }
 
-            string_arg_gems_enum = string_arg_gems.to_enum
-            sorted_gems_enum     = sorted_gems.to_enum
+            gems_enum        = gems.to_enum
+            sorted_gems_enum = sorted_gems.to_enum
 
             loop do
-              string_arg_gem = string_arg_gems_enum.next
-              sorted_gem     = sorted_gems_enum.next
+              gem        = gems_enum.next
+              sorted_gem = sorted_gems_enum.next
 
-              unless string_arg_gem == sorted_gem
-                corrector.replace(string_arg_gem.loc.expression, sorted_gem.source)
+              unless gem == sorted_gem
+                corrector.replace(gem.loc.expression, sorted_gem.source)
               end
             end
           end
         end
 
         private
+
+        def string_arg_gems(node)
+          gems = node.children.select { |n| gem_type?(n) }
+          gems.select { |gem| gem_name(gem) }
+        end
 
         def gem_type?(node)
           _, method_name, *_args = *node
