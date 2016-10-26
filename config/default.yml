@@ -15,3 +15,8 @@ Gemfile/GroupType:
     - double_quotes
     - single_quotes
   Enabled: true
+
+Gemfile/SortGemAscending:
+  Description: "Sort the gem in alphabetical order"
+  TopGems:
+  Enabled: true
