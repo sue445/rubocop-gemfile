@@ -1,15 +1,17 @@
 # RuboCop::Gemfile
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rubocop/gemfile`. To experiment with that code, run `bin/console` for an interactive prompt.
+Code style checking for Gemfile, as an extension to [Rubocop](https://github.com/bbatsov/rubocop)
 
-TODO: Delete this and the text above, and describe your gem
+[![Gem Version](https://badge.fury.io/rb/rubocop-gemfile.svg)](https://badge.fury.io/rb/rubocop-gemfile)
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'rubocop-gemfile'
+group :development do
+  gem 'rubocop-gemfile', require: false
+end
 ```
 
 And then execute:
@@ -22,7 +24,19 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### RuboCop configuration file
+
+Put this into your `.rubocop.yml`.
+
+```
+require: rubocop-gemfile
+```
+
+## The Cops
+see these.
+
+* [config/default.yml](config/default.yml)
+* [lib/rubocop/cop/gemfile/](lib/rubocop/cop/gemfile/)
 
 ## Development
 
@@ -32,7 +46,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rubocop-gemfile.
+Bug reports and pull requests are welcome on GitHub at https://github.com/sue445/rubocop-gemfile.
 
 
 ## License
