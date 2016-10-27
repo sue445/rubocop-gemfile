@@ -56,17 +56,17 @@ module RuboCop
       class GroupType < Cop
         MSG = 'Use %s group'.freeze
 
-        ENFORCED_STYLE_SYMBOL        = "symbol".freeze
-        ENFORCED_STYLE_DOUBLE_QUOTES = "double_quotes".freeze
-        ENFORCED_STYLE_SINGLE_QUOTES = "single_quotes".freeze
+        ENFORCED_STYLE_SYMBOL        = 'symbol'.freeze
+        ENFORCED_STYLE_DOUBLE_QUOTES = 'double_quotes'.freeze
+        ENFORCED_STYLE_SINGLE_QUOTES = 'single_quotes'.freeze
 
         def on_send(node)
           _, method_name, *args = *node
 
           return unless method_name == :group
 
-          enforced_style = cop_config["EnforcedStyle"]
-          unless cop_config["SupportedStyles"].include?(enforced_style)
+          enforced_style = cop_config['EnforcedStyle']
+          unless cop_config['SupportedStyles'].include?(enforced_style)
             raise ValidationError, "EnforcedStyle(#{enforced_style}) is not neither double_quotes, single_quotes or symbol"
           end
 
@@ -87,7 +87,7 @@ module RuboCop
         def autocorrect(node)
           _receiver, _method_name, *args = *node
 
-          case cop_config["EnforcedStyle"]
+          case cop_config['EnforcedStyle']
           when ENFORCED_STYLE_SYMBOL
             lambda do |corrector|
               args.each do |arg|

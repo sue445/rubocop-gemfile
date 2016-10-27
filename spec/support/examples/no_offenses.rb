@@ -1,5 +1,6 @@
-RSpec.shared_examples "no offences" do
-  it "does not occur any offenses" do
+# frozen_string_literal: true
+RSpec.shared_examples 'no offences' do
+  it 'does not occur any offenses' do
     inspect_source(cop, source)
 
     aggregate_failures do
@@ -8,7 +9,7 @@ RSpec.shared_examples "no offences" do
     end
   end
 
-  it "should not be changed with auto-correct" do
+  it 'should not be changed with auto-correct' do
     new_source = autocorrect_source(cop, source)
     expect(new_source).to eq(source)
   end

@@ -29,7 +29,7 @@ module RuboCop
       #   gem "coffee-rails"
       #   gem "sass-rails"
       class SortGemAscending < Cop
-        MSG = "gem should be sorted by ascending".freeze
+        MSG = 'gem should be sorted by ascending'.freeze
 
         def on_begin(node)
           gems = string_arg_gems(node)
@@ -95,7 +95,7 @@ module RuboCop
         end
 
         def top_gems
-          @top_gems ||= Array(cop_config["TopGems"])
+          @top_gems ||= Array(cop_config['TopGems'])
         end
 
         def top_gem?(gem)

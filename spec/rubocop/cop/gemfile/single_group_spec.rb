@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 describe RuboCop::Cop::Gemfile::SingleGroup do
   subject(:cop) { described_class.new }
 
-  context "Single group" do
+  context 'Single group' do
     let(:source) do
       <<-RUBY
 group :test do
@@ -9,10 +10,10 @@ end
       RUBY
     end
 
-    it_behaves_like "no offences"
+    it_behaves_like 'no offences'
   end
 
-  context "Muiliple group" do
+  context 'Muiliple group' do
     let(:source) do
       <<-RUBY
 group :test, :development do
@@ -24,7 +25,7 @@ end
       inspect_source(cop, source)
 
       aggregate_failures do
-        expect(cop.messages).to eq ["`group` should not have multiple groups"]
+        expect(cop.messages).to eq ['`group` should not have multiple groups']
         expect(cop.offenses.size).to eq 1
         expect(cop.highlights).to eq([':test, :development'])
       end

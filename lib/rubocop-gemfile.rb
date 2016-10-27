@@ -1,1 +1,2 @@
-require "rubocop/gemfile"
+# frozen_string_literal: true
+require 'rubocop/gemfile'
