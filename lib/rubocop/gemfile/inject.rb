@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module RuboCop
   module Gemfile
     # Because RuboCop doesn't yet support plugins, we have to monkey patch in a

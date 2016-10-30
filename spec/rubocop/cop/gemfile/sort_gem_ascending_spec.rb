@@ -1,14 +1,15 @@
-describe RuboCop::Cop::Gemfile::SortGemAscending, :config  do
+# frozen_string_literal: true
+describe RuboCop::Cop::Gemfile::SortGemAscending, :config do
   subject(:cop) { described_class.new(config) }
 
-  let(:cop_config) {
+  let(:cop_config) do
     {
-      "TopGems" => top_gems,
+      'TopGems' => top_gems
     }
-  }
+  end
   let(:top_gems) { [] }
 
-  context "With ascending 1" do
+  context 'With ascending 1' do
     let(:source) do
       <<-RUBY
 source "https://rubygems.org"
@@ -18,10 +19,10 @@ gem "rails"
       RUBY
     end
 
-    it_behaves_like "no offences"
+    it_behaves_like 'no offences'
   end
 
-  context "With ascending 2" do
+  context 'With ascending 2' do
     let(:source) do
       <<-RUBY
 source "https://rubygems.org"
@@ -35,10 +36,10 @@ gem 'uglifier', '>= 1.3.0'
       RUBY
     end
 
-    it_behaves_like "no offences"
+    it_behaves_like 'no offences'
   end
 
-  context "Without ascending 1" do
+  context 'Without ascending 1' do
     let(:source) do
       <<-RUBY
 source "https://rubygems.org"
@@ -61,19 +62,19 @@ gem "rails"
       inspect_source(cop, source)
 
       aggregate_failures do
-        expect(cop.messages).to eq ["gem should be sorted by ascending"]
+        expect(cop.messages).to eq ['gem should be sorted by ascending']
         expect(cop.offenses.size).to eq 1
-        expect(cop.highlights).to eq([%q(gem "bundler")])
+        expect(cop.highlights).to eq(['gem "bundler"'])
       end
     end
 
-    it "auto-correct" do
+    it 'auto-correct' do
       new_source = autocorrect_source(cop, source)
       expect(new_source).to eq(expected_source)
     end
   end
 
-  context "Without ascending 2" do
+  context 'Without ascending 2' do
     let(:source) do
       <<-RUBY
 source "https://rubygems.org"
@@ -104,19 +105,21 @@ gem 'uglifier', '>= 1.3.0'
       inspect_source(cop, source)
 
       aggregate_failures do
-        expect(cop.messages).to eq ["gem should be sorted by ascending", "gem should be sorted by ascending"]
+        expect(cop.messages).to eq ['gem should be sorted by ascending',
+                                    'gem should be sorted by ascending']
         expect(cop.offenses.size).to eq 2
-        expect(cop.highlights).to eq([%q(gem 'pg', '~> 0.18'), %q(gem 'coffee-rails', '~> 4.2')])
+        expect(cop.highlights).to eq(["gem 'pg', '~> 0.18'",
+                                      "gem 'coffee-rails', '~> 4.2'"])
       end
     end
 
-    it "auto-correct" do
+    it 'auto-correct' do
       new_source = autocorrect_source(cop, source)
       expect(new_source).to eq(expected_source)
     end
   end
 
-  context "Without ascending 3" do
+  context 'Without ascending 3' do
     let(:top_gems) { %w(rails) }
 
     let(:source) do
@@ -149,20 +152,22 @@ gem 'uglifier', '>= 1.3.0'
       inspect_source(cop, source)
 
       aggregate_failures do
-        expect(cop.messages).to eq ["gem 'rails' should be top of Gemfile", "gem should be sorted by ascending"]
+        expect(cop.messages).to eq(["gem 'rails' should be top of Gemfile",
+                                    'gem should be sorted by ascending'])
         expect(cop.offenses.size).to eq 2
-        expect(cop.highlights).to eq([%q(gem 'rails', '~> 5.0.0', '>= 5.0.0.1'), %q(gem 'coffee-rails', '~> 4.2')])
+        expect(cop.highlights).to eq(["gem 'rails', '~> 5.0.0', '>= 5.0.0.1'",
+                                      "gem 'coffee-rails', '~> 4.2'"])
       end
     end
 
-    it "auto-correct" do
+    it 'auto-correct' do
       new_source = autocorrect_source(cop, source)
       expect(new_source).to eq(expected_source)
     end
   end
 
-  context "contains group block" do
-    context "With ascending 1" do
+  context 'contains group block' do
+    context 'With ascending 1' do
       let(:source) do
         <<-RUBY
 source "https://rubygems.org"
@@ -177,10 +182,10 @@ end
         RUBY
       end
 
-      it_behaves_like "no offences"
+      it_behaves_like 'no offences'
     end
 
-    context "Without ascending 1" do
+    context 'Without ascending 1' do
       let(:source) do
         <<-RUBY
 source "https://rubygems.org"
@@ -213,13 +218,13 @@ end
         inspect_source(cop, source)
 
         aggregate_failures do
-          expect(cop.messages).to eq ["gem should be sorted by ascending"]
+          expect(cop.messages).to eq ['gem should be sorted by ascending']
           expect(cop.offenses.size).to eq 1
-          expect(cop.highlights).to eq([%q(gem "factory_girl")])
+          expect(cop.highlights).to eq(['gem "factory_girl"'])
         end
       end
 
-      it "auto-correct" do
+      it 'auto-correct' do
         new_source = autocorrect_source(cop, source)
         expect(new_source).to eq(expected_source)
       end

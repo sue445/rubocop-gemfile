@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'rubocop/cop/gemfile/concerns/sort_gem_ascending/autocorrect'
+require 'rubocop/cop/gemfile/concerns/sort_gem_ascending/on_begin'
+
 module RuboCop
   module Cop
     module Gemfile
@@ -29,22 +32,16 @@ module RuboCop
       #   gem "coffee-rails"
       #   gem "sass-rails"
       class SortGemAscending < Cop
-        MSG = "gem should be sorted by ascending".freeze
+        MSG = 'gem should be sorted by ascending'.freeze
+
+        include RuboCop::Cop::Gemfile::Concerns::SortGemAscending::Autocorrect
+        include RuboCop::Cop::Gemfile::Concerns::SortGemAscending::OnBegin
 
         def on_begin(node)
           gems = string_arg_gems(node)
 
           gems.each_cons(2) do |gem1, gem2|
-            gem_name1 = gem_name(gem1)
-            gem_name2 = gem_name(gem2)
-
-            if !top_gem?(gem1) && top_gem?(gem2)
-              add_offense(node, gem2.loc.expression, "gem '#{gem_name2}' should be top of Gemfile")
-            elsif top_gem?(gem1) && !top_gem?(gem2)
-              # nop
-            else
-              add_offense(node, gem2.loc.expression) if gem_name1 > gem_name2
-            end
+            check_gems_order(node, gem1, gem2)
           end
         end
 
@@ -56,17 +53,7 @@ module RuboCop
               [sort_key, gem_name(gem)]
             end
 
-            gems_enum        = gems.to_enum
-            sorted_gems_enum = sorted_gems.to_enum
-
-            loop do
-              gem        = gems_enum.next
-              sorted_gem = sorted_gems_enum.next
-
-              unless gem == sorted_gem
-                corrector.replace(gem.loc.expression, sorted_gem.source)
-              end
-            end
+            correct_gems(corrector, gems, sorted_gems)
           end
         end
 
@@ -95,7 +82,7 @@ module RuboCop
         end
 
         def top_gems
-          @top_gems ||= Array(cop_config["TopGems"])
+          @top_gems ||= Array(cop_config['TopGems'])
         end
 
         def top_gem?(gem)

@@ -31,7 +31,8 @@ module RuboCop
         def args_location(args)
           begin_pos = args.first.loc.begin.begin_pos
           end_pos = args.last.loc.expression.end_pos
-          Parser::Source::Range.new(args.first.loc.expression.source_buffer, begin_pos, end_pos)
+          Parser::Source::Range.new(args.first.loc.expression.source_buffer,
+                                    begin_pos, end_pos)
         end
       end
     end
