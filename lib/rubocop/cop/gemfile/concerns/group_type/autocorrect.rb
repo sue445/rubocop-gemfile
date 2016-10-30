@@ -4,7 +4,7 @@ module RuboCop
     module Gemfile
       module Concerns
         module GroupType
-          module Autocorrect
+          module Autocorrect # rubocop:disable Style/Documentation
             private
 
             def correct_symbol_group(args)

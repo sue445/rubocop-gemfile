@@ -3,7 +3,7 @@ module RuboCop
     module Gemfile
       module Concerns
         module SortGemAscending
-          module Autocorrect
+          module Autocorrect # rubocop:disable Style/Documentation
             private
 
             def correct_gems(corrector, gems, sorted_gems)

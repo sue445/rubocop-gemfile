@@ -3,7 +3,7 @@ module RuboCop
     module Gemfile
       module Concerns
         module GroupType
-          module OnSend
+          module OnSend # rubocop:disable Style/Documentation
             private
 
             def check_symbol_group(arg, node, message)
