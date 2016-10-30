@@ -1,2 +1,6 @@
 AllCops:
   DisplayCopNames: true
+
+Style/FileName:
+  Exclude:
+    - lib/rubocop-gemfile.rb
