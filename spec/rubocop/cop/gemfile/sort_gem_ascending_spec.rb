@@ -105,9 +105,11 @@ gem 'uglifier', '>= 1.3.0'
       inspect_source(cop, source)
 
       aggregate_failures do
-        expect(cop.messages).to eq ['gem should be sorted by ascending', 'gem should be sorted by ascending']
+        expect(cop.messages).to eq ['gem should be sorted by ascending',
+                                    'gem should be sorted by ascending']
         expect(cop.offenses.size).to eq 2
-        expect(cop.highlights).to eq(["gem 'pg', '~> 0.18'", "gem 'coffee-rails', '~> 4.2'"])
+        expect(cop.highlights).to eq(["gem 'pg', '~> 0.18'",
+                                      "gem 'coffee-rails', '~> 4.2'"])
       end
     end
 
@@ -150,9 +152,11 @@ gem 'uglifier', '>= 1.3.0'
       inspect_source(cop, source)
 
       aggregate_failures do
-        expect(cop.messages).to eq ["gem 'rails' should be top of Gemfile", 'gem should be sorted by ascending']
+        expect(cop.messages).to eq(["gem 'rails' should be top of Gemfile",
+                                    'gem should be sorted by ascending'])
         expect(cop.offenses.size).to eq 2
-        expect(cop.highlights).to eq(["gem 'rails', '~> 5.0.0', '>= 5.0.0.1'", "gem 'coffee-rails', '~> 4.2'"])
+        expect(cop.highlights).to eq(["gem 'rails', '~> 5.0.0', '>= 5.0.0.1'",
+                                      "gem 'coffee-rails', '~> 4.2'"])
       end
     end
 
