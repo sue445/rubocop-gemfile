@@ -4,10 +4,3 @@ AllCops:
 Style/FileName:
   Exclude:
     - lib/rubocop-gemfile.rb
-
-Style/Documentation:
-  Exclude:
-    - 'lib/rubocop/cop/gemfile/concerns/**/*.rb'
-    # rubocop default setting
-    - 'spec/**/*'
-    - 'test/**/*'

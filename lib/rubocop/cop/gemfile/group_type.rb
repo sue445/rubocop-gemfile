@@ -81,7 +81,7 @@ module RuboCop
         def autocorrect(node)
           _receiver, _method_name, *args = *node
 
-          case cop_config['EnforcedStyle']
+          case enforced_style
           when ENFORCED_STYLE_SYMBOL
             correct_symbol_group(args)
           when ENFORCED_STYLE_DOUBLE_QUOTES
@@ -111,8 +111,8 @@ module RuboCop
 
           @enforced_style = cop_config['EnforcedStyle']
 
-          unless cop_config['SupportedStyles'].include?(enforced_style)
-            message = VALIDATION_ENFORCED_STYLE_MSG % enforced_style
+          unless cop_config['SupportedStyles'].include?(@enforced_style)
+            message = VALIDATION_ENFORCED_STYLE_MSG % @enforced_style
             raise ValidationError, message
           end
 

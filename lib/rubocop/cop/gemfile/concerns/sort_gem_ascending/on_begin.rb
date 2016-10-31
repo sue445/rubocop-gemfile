@@ -3,7 +3,7 @@ module RuboCop
     module Gemfile
       module Concerns
         module SortGemAscending
-          module OnBegin
+          module OnBegin # rubocop:disable Style/Documentation
             private
 
             def check_gems_order(node, gem1, gem2)
