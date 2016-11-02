@@ -4,3 +4,6 @@ AllCops:
 Style/FileName:
   Exclude:
     - lib/rubocop-gemfile.rb
+
+Style/RedundantFreeze:
+  Enabled: false
