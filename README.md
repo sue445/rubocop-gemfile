@@ -3,6 +3,7 @@
 Code style checking for Gemfile, as an extension to [Rubocop](https://github.com/bbatsov/rubocop)
 
 [![Gem Version](https://badge.fury.io/rb/rubocop-gemfile.svg)](https://badge.fury.io/rb/rubocop-gemfile)
+[![Build Status](https://travis-ci.org/sue445/rubocop-gemfile.svg?branch=master)](https://travis-ci.org/sue445/rubocop-gemfile)
 
 ## Installation
 
