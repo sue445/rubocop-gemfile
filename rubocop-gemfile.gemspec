@@ -12,8 +12,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Code style checking for Gemfile'
   spec.description   = 'Code style checking for Gemfile'
-  # TODO: make public
-  # spec.homepage      = "https://github.com/sue445/rubocop-gemfile"
+  spec.homepage      = "https://github.com/sue445/rubocop-gemfile"
   spec.license       = 'MIT'
 
   spec.files =
