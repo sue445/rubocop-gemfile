@@ -4,6 +4,8 @@ Code style checking for Gemfile, as an extension to [Rubocop](https://github.com
 
 [![Gem Version](https://badge.fury.io/rb/rubocop-gemfile.svg)](https://badge.fury.io/rb/rubocop-gemfile)
 [![Build Status](https://travis-ci.org/sue445/rubocop-gemfile.svg?branch=master)](https://travis-ci.org/sue445/rubocop-gemfile)
+[![Code Climate](https://codeclimate.com/github/sue445/rubocop-gemfile/badges/gpa.svg)](https://codeclimate.com/github/sue445/rubocop-gemfile)
+[![Coverage Status](https://coveralls.io/repos/github/sue445/rubocop-gemfile/badge.svg?branch=master)](https://coveralls.io/github/sue445/rubocop-gemfile?branch=master)
 
 ## Installation
 

@@ -9,7 +9,7 @@ before_install: gem install bundler -v 1.12.5
 bundler_args: "--jobs=2"
 cache: bundler
 before_script:
-- export CODECLIMATE_REPO_TOKEN=
+- export CODECLIMATE_REPO_TOKEN=6e639271e2b71c8d880f7449a0d56a7029f75cf9f468abcae63b66f48e61d249
 - export CI=true
 script:
 - bundle exec rspec
