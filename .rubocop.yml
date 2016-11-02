@@ -7,3 +7,6 @@ Style/FileName:
 
 Style/RedundantFreeze:
   Enabled: false
+
+Metrics/MethodLength:
+  Max: 12

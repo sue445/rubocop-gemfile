@@ -230,4 +230,88 @@ end
       end
     end
   end
+
+  context 'contains comment' do
+    context 'With ascending' do
+      let(:source) do
+        <<-RUBY
+source "https://rubygems.org"
+
+# Use CoffeeScript for .coffee assets and views
+gem 'coffee-rails', '~> 4.2'
+# Use postgresql as the database for Active Record
+gem 'pg', '~> 0.18'
+# Use Puma as the app server
+gem 'puma', '~> 3.0'
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 5.0'
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+        RUBY
+      end
+
+      it_behaves_like 'no offences'
+    end
+
+    context 'Without ascending' do
+      let(:source) do
+        <<-RUBY
+source "https://rubygems.org"
+
+# TODO: Keep always newest rails
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
+# Use postgresql as the database for Active Record
+gem 'pg', '~> 0.18'
+# Use Puma as the app server
+gem 'puma', '~> 3.0'
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 5.0'
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+# Use CoffeeScript for .coffee assets and views
+gem 'coffee-rails', '~> 4.2'
+        RUBY
+      end
+
+      let(:expected_source) do
+        <<-RUBY
+source "https://rubygems.org"
+
+# Use CoffeeScript for .coffee assets and views
+gem 'coffee-rails', '~> 4.2'
+# Use postgresql as the database for Active Record
+gem 'pg', '~> 0.18'
+# Use Puma as the app server
+gem 'puma', '~> 3.0'
+# TODO: Keep always newest rails
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 5.0'
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+        RUBY
+      end
+
+      it do
+        inspect_source(cop, source)
+
+        aggregate_failures do
+          expect(cop.messages).to eq(['gem should be sorted by ascending',
+                                      'gem should be sorted by ascending'])
+          expect(cop.offenses.size).to eq 2
+          expect(cop.highlights).to eq(["gem 'pg', '~> 0.18'",
+                                        "gem 'coffee-rails', '~> 4.2'"])
+        end
+      end
+
+      it 'auto-correct with gem comment' do
+        new_source = autocorrect_source(cop, source)
+        expect(new_source).to eq(expected_source)
+      end
+    end
+  end
 end
