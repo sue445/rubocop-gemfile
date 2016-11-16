@@ -15,6 +15,7 @@ before_script:
 script:
 - bundle exec rspec
 - bundle exec rubocop
+- bundle exec codeclimate-test-reporter
 branches:
   only:
   - master
